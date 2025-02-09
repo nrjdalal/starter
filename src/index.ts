@@ -1,1 +1,7 @@
-console.log("No source are available!")
+import { author, name, version } from "~/package.json"
+
+export const info = {
+  name,
+  version,
+  author,
+}

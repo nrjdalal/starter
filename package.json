@@ -1,9 +1,14 @@
 {
   "name": "starter",
   "version": "0.0.1",
-  "description": "",
-  "keywords": [],
+  "description": "placeholder for a new package",
+  "keywords": [
+    "starter"
+  ],
+  "homepage": "https://github.com/nrjdalal/starter#readme",
+  "bugs": "https://github.com/nrjdalal/starter/issues",
   "repository": "nrjdalal/starter",
+  "funding": "https://github.com/sponsors/nrjdalal",
   "license": "MIT",
   "author": {
     "name": "Neeraj Dalal",
