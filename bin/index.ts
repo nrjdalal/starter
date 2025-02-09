@@ -16,8 +16,6 @@ Options:
   -v, --version  Display version
   -h, --help     Display help for <command>
 
-
-
 Author:
   ${author.name} <${author.email}> (${author.url})`
 
