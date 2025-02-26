@@ -1,5 +1,5 @@
 ## Clone this template
 
 ```bash
-npx gitpick nrjdalal/starter
+npx gitpick@latest nrjdalal/starter
 ```
