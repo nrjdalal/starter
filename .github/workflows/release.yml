@@ -39,13 +39,13 @@ jobs:
 
       - name: Publish Packages
         run: |
+          package_name=$(bunx json -f package.json -a name)
           if ! npm view "$package_name" > /dev/null 2>&1; then
             echo "Package does not exist. Please publish the package first."
-            exit 0
+            return 0
           fi
-          package_name=$(bunx json -f package.json -a name)
-          current_latest=$(bunx json -f package.json -a version)
-          IFS='.' read -r major minor patch <<< "$current_latest"
+          current_version=$(bunx json -f package.json -a version)
+          IFS='.' read -r major minor patch <<< "$current_version"
           future_latest="$major.$((minor + 1)).0"
           current_canary=$(npm view "$package_name" dist-tags.canary 2>/dev/null)
           if [ -z "$current_canary" ]; then
