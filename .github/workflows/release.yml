@@ -35,6 +35,7 @@ jobs:
 
       - name: Publish Packages
         run: |
+          npm config list
           package_name=$(bunx json -f package.json -a name)
           current_latest=$(bunx json -f package.json -a version)
           IFS='.' read -r major minor patch <<< "$current_latest"
