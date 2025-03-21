@@ -58,12 +58,11 @@ jobs:
           fi
           bunx json -I -f package.json -e "this.version=\"$future_canary\""
           bun publish --provenance --access public --tag canary
-          # Generate changelog
-          npx changelogen@latest --output
           # Create a pull request
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           git checkout -b release-"$future_canary"
+          npx changelogen@latest --output
           git add CHANGELOG.md package.json
           git commit -m "chore(release): $future_canary"
           git push origin release-"$future_canary"
