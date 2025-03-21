@@ -40,7 +40,7 @@ jobs:
       - name: Publish Packages
         run: |
           package_name=$(bunx json -f package.json -a name)
-          npm view "$package_name" 2>/dev/null || { echo "Package $package_name does not exist in the npm registry. Skipping publish."; exit 0; }
+          npm view "$package_name" 2>/dev/null || { echo "$package_name does not exist in the npm registry. Skipping publish."; exit 0; }
           current_version=$(bunx json -f package.json -a version)
           IFS='.' read -r major minor patch <<< "$current_version"
           future_latest="$major.$((minor + 1)).0"
