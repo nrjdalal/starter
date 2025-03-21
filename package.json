@@ -1,9 +1,9 @@
 {
-  "name": "awesome-ts-starter",
+  "name": "onset-ts-starter",
   "version": "0.0.1",
-  "description": "awesome-ts-starter",
+  "description": "onset-ts-starter",
   "keywords": [
-    "awesome-ts-starter"
+    "onset-ts-starter"
   ],
   "homepage": "https://github.com/nrjdalal/starter#readme",
   "bugs": "https://github.com/nrjdalal/starter/issues",
