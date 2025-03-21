@@ -39,11 +39,13 @@ jobs:
 
       - name: Publish Packages
         run: |
+          # Check if package exists in npm registry
           package_name=$(bunx json -f package.json -a name)
           npm view "$package_name" 2>/dev/null || {
             echo "$package_name does not exist in the npm registry. Skipping publish."
             exit 0
           }
+          # Release canary version
           current_version=$(bunx json -f package.json -a version)
           IFS='.' read -r major minor patch <<<"$current_version"
           future_latest="$major.$((minor + 1)).0"
@@ -56,5 +58,15 @@ jobs:
           fi
           bunx json -I -f package.json -e "this.version=\"$future_canary\""
           bun publish --provenance --access public --tag canary
+          # Generate changelog
+          npx changelogen@latest --release
+          # Create a pull request
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout -b release-"$future_canary"
+          git add CHANGELOG.md package.json
+          git commit -m "chore(release): $future_canary"
+          git push origin release-"$future_canary"
+          gh pr create --base main --head release-"$future_canary" --title "chore(release): $future_canary" --body "Release $future_canary"
         env:
           NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
