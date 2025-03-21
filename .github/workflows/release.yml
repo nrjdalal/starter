@@ -36,22 +36,23 @@ jobs:
       - name: Publish Packages
         run: |
           npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
-          current_latest=$(npm view npm dist-tags.latest --real)                                                                                                                         
+          package_name=$(node -p "require('./package.json').name")
+          current_latest=$(node -p "require('./package.json').version")
           IFS='.' read -r major minor patch <<< "$current_latest"
           future_latest="$major.$((minor + 1)).0"
-          current_canary=$(npm view npm dist-tags.canary --real)
+          current_canary=$(npm view "$package_name" dist-tags.canary --real 2>/dev/null)
           if [ -z "$current_canary" ]; then
-            future_canary="$future_latest-canary.0"
+          future_canary="$future_latest-canary.0"
           else
-            IFS='.-' read -r canary_major canary_minor canary_patch canary_tag canary_version <<< "$current_canary"
-            future_canary="$canary_major.$canary_minor.$canary_patch-canary.$((canary_version + 1))"
+          IFS='.-' read -r canary_major canary_minor canary_patch canary_tag canary_version <<< "$current_canary"
+          future_canary="$canary_major.$canary_minor.$canary_patch-canary.$((canary_version + 1))"
           fi
           echo "$current_latest"
           echo "$future_latest"
           echo "$current_canary"
           echo "$future_canary"
           npm version "$future_canary"
-          bun publish --provenance --access public --tag canary
+          npm publish --provenance --access public --tag canary
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
