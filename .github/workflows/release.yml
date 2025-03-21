@@ -62,6 +62,6 @@ jobs:
           changelog=$(bunx changelogen@latest)
           echo "$changelog"
           # create a github release with the changelog
-          curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/$GITHUB_REPOSITORY/releases -d "{\"tag_name\":\"$future_canary\",\"name\":\"$future_canary\",\"body\":\"$changelog\"}"
+          curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/repos/$GITHUB_REPOSITORY/releases -d "{\"tag_name\":\"$future_canary\",\"name\":\"$future_canary\",\"body\":\"$changelog\"}"
         env:
           NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
