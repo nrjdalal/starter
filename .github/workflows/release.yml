@@ -59,11 +59,14 @@ jobs:
           fi
           bunx json -I -f package.json -e "this.version=\"$future_canary\""
           bun publish --provenance --access public --tag canary
+          # Stash changes before pulling
+          git stash --include-untracked
+          git pull origin main --rebase
+          git stash pop
           # Create a pull request
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           git checkout -b canary
-          git pull origin main --rebase
           npx changelogen@latest --output
           git add CHANGELOG.md package.json
           git commit -m "chore(release): $future_canary"
