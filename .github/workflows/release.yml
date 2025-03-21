@@ -9,6 +9,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 permissions:
   id-token: write
+  contents: write
 
 jobs:
   release:
@@ -61,11 +62,11 @@ jobs:
           # Create a pull request
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git checkout -b release-"$future_canary"
+          git checkout -b canary
           npx changelogen@latest --output
           git add CHANGELOG.md package.json
           git commit -m "chore(release): $future_canary"
-          git push origin release-"$future_canary"
-          gh pr create --base main --head release-"$future_canary" --title "chore(release): $future_canary" --body "Release $future_canary"
+          git push origin canary
+          gh pr create --base main --head canary --title "chore(release): $future_canary" --body "Release $future_canary"
         env:
           NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
