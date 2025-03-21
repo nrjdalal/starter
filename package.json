@@ -1,9 +1,9 @@
 {
-  "name": "onset-ts-starter",
+  "name": "onset-ts",
   "version": "0.1.0-canary.1",
-  "description": "onset-ts-starter",
+  "description": "onset-ts",
   "keywords": [
-    "onset-ts-starter"
+    "onset-ts"
   ],
   "homepage": "https://github.com/nrjdalal/starter#readme",
   "bugs": "https://github.com/nrjdalal/starter/issues",
