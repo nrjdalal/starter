@@ -59,7 +59,7 @@ jobs:
           bunx json -I -f package.json -e "this.version=\"$future_canary\""
           bun publish --provenance --access public --tag canary
           # Generate changelog
-          npx changelogen@latest --release
+          npx changelogen@latest --output
           # Create a pull request
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
