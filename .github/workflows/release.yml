@@ -51,7 +51,7 @@ jobs:
           echo "$current_canary"
           echo "$future_canary"
           npm version "$future_canary"
-          npm publish --tag canary
+          npm publish --provenance --access public --tag canary
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 

@@ -1,9 +1,9 @@
 {
-  "name": "starter",
+  "name": "awesome-ts-starter",
   "version": "0.0.1",
-  "description": "starter",
+  "description": "awesome-ts-starter",
   "keywords": [
-    "starter"
+    "awesome-ts-starter"
   ],
   "homepage": "https://github.com/nrjdalal/starter#readme",
   "bugs": "https://github.com/nrjdalal/starter/issues",
