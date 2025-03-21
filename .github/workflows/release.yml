@@ -65,6 +65,11 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             "https://api.github.com/repos/$GITHUB_REPOSITORY/releases" \
-            -d "$(printf '{"tag_name": "%s", "name": "%s", "body": "%s", "prerelease": true}' "$future_canary" "$future_canary" "$(bunx changelogen@latest)")"
+            -d "{
+              \"prerelease\": true
+              \"tag_name\": \"$future_canary\",
+              \"name\": \"$future_canary\",
+              \"body\": \"$(bunx changelogen@latest)\"
+            }"
         env:
           NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
