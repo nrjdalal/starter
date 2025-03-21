@@ -39,7 +39,6 @@ jobs:
 
       - name: Publish Packages
         run: |
-          npm config list
           package_name=$(bunx json -f package.json -a name)
           current_latest=$(bunx json -f package.json -a version)
           IFS='.' read -r major minor patch <<< "$current_latest"
@@ -52,6 +51,10 @@ jobs:
           future_canary="$canary_major.$canary_minor.$canary_patch-canary.$((canary_version + 1))"
           fi
           bunx json -I -f package.json -e "this.version=\"$future_canary\""
-          bun publish --provenance --access public --tag canary
+           if [ -z "$(npm view "$package_name" version --real 2>/dev/null)" ]; then
+            npm publish --provenance --access public
+          else
+            npm publish --provenance --access public --tag canary
+          fi
         env:
           NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
