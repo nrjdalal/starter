@@ -59,13 +59,12 @@ jobs:
           fi
           bunx json -I -f package.json -e "this.version=\"$future_canary\""
           bun publish --provenance --access public --tag canary
-          # create a github release with the changelog
-          echo "{\"tag_name\": \"$future_canary\", \"name\": \"$future_canary\", \"body\": \"$(bunx changelogen@latest)\"}"
+          release_data=$(printf '{"tag_name": "%s", "name": "%s", "body": "%s"}' "$future_canary" "$future_canary" "$changelog")
           curl -L \
           -X POST \
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           "https://api.github.com/repos/$GITHUB_REPOSITORY/releases" \
-          -d "{\"tag_name\": \"$future_canary\", \"name\": \"$future_canary\", \"body\": \"$(bunx changelogen@latest)\"}"
+          -d "$release_data"
         env:
           NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
