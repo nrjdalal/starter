@@ -50,8 +50,8 @@ jobs:
           echo "$future_latest"
           echo "$current_canary"
           echo "$future_canary"
-          npx json -I -f package.json -e "this.version=\"$future_canary\""
-          npm publish --provenance --access public --tag canary
+          bunx json -I -f package.json -e "this.version=\"$future_canary\""
+          bun publish --provenance --access public --tag canary
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
