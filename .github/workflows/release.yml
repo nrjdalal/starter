@@ -51,7 +51,7 @@ jobs:
           future_canary="$canary_major.$canary_minor.$canary_patch-canary.$((canary_version + 1))"
           fi
           bunx json -I -f package.json -e "this.version=\"$future_canary\""
-           if [ -z "$(npm view "$package_name" version 2>/dev/null)" ]; then
+          if [ -z "$(npm view "$package_name" version 2>/dev/null)" ]; then
             npm publish --provenance --access public
           else
             npm publish --provenance --access public --tag canary
