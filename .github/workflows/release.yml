@@ -53,6 +53,6 @@ jobs:
           echo "$current_canary"
           echo "$future_canary"
           bunx json -I -f package.json -e "this.version=\"$future_canary\""
-          npm publish --access public --tag canary
+          npm publish --provenance --access public --tag canary
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
