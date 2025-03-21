@@ -32,7 +32,7 @@ jobs:
           registry-url: https://registry.npmjs.org
 
       - name: Install Dependencies
-        run: bun install --no-save
+        run: bun install --frozen-lockfile
 
       - name: Build
         run: bun run build
@@ -56,6 +56,6 @@ jobs:
           echo "$current_canary"
           echo "$future_canary"
           bunx json -I -f package.json -e "this.version=\"$future_canary\""
-          npm publish --no-git-checks --provenance --access public --tag canary
+          bun publish --no-git-checks --provenance --access public --tag canary
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
