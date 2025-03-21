@@ -35,7 +35,7 @@ jobs:
 
       - name: Publish Packages
         run: |
-          npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
           package_name=$(node -p "require('./package.json').name")
           current_latest=$(node -p "require('./package.json').version")
           IFS='.' read -r major minor patch <<< "$current_latest"
