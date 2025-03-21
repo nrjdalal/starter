@@ -58,4 +58,4 @@ jobs:
           bunx json -I -f package.json -e "this.version=\"$future_canary\""
           bun publish --no-git-checks --provenance --access public --tag canary
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
