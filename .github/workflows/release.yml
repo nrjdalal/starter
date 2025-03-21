@@ -35,8 +35,8 @@ jobs:
 
       - name: Publish Packages
         run: |
-          package_name=$(node -p "require('./package.json').name")
-          current_latest=$(node -p "require('./package.json').version")
+          package_name=$(bunx json -f package.json -a name)
+          current_latest=$(bunx json -f package.json -a version)
           IFS='.' read -r major minor patch <<< "$current_latest"
           future_latest="$major.$((minor + 1)).0"
           current_canary=$(npm view "$package_name" dist-tags.canary --real 2>/dev/null)
