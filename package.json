@@ -1,10 +1,8 @@
 {
-  "name": "onset-ts-test",
+  "name": "onset-ts-1",
   "version": "0.0.1",
   "description": "onset-ts-1",
-  "keywords": [
-    "onset-ts"
-  ],
+  "keywords": [],
   "homepage": "https://github.com/nrjdalal/starter#readme",
   "bugs": "https://github.com/nrjdalal/starter/issues",
   "repository": "nrjdalal/starter",
