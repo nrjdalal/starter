@@ -60,6 +60,7 @@ jobs:
           bunx json -I -f package.json -e "this.version=\"$future_canary\""
           bun publish --provenance --access public --tag canary
           changelog=$(bunx changelogen@latest)
+          echo "$changelog"
           # create a github release with the changelog
           curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/$GITHUB_REPOSITORY/releases -d "{\"tag_name\":\"$future_canary\",\"name\":\"$future_canary\",\"body\":\"$changelog\"}"
         env:
