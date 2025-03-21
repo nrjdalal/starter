@@ -42,7 +42,7 @@ jobs:
           package_name=$(bunx json -f package.json -a name)
           if ! npm view "$package_name" > /dev/null 2>&1; then
             echo "Package does not exist. Please publish the package first."
-            return 0
+            exit 0
           fi
           current_version=$(bunx json -f package.json -a version)
           IFS='.' read -r major minor patch <<< "$current_version"
