@@ -50,8 +50,8 @@ jobs:
           echo "$future_latest"
           echo "$current_canary"
           echo "$future_canary"
-          npm version "$future_canary"
-          npm publish --provenance --access public --tag canary
+          bun version "$future_canary"
+          bun publish --provenance --access public --tag canary
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
