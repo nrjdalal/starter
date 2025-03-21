@@ -43,7 +43,7 @@ jobs:
           current_latest=$(bunx json -f package.json -a version)
           IFS='.' read -r major minor patch <<< "$current_latest"
           future_latest="$major.$((minor + 1)).0"
-          current_canary=$(npm view "$package_name" dist-tags.canary --real 2>/dev/null)
+          current_canary=$(npm view "$package_name" dist-tags.canary 2>/dev/null)
           if [ -z "$current_canary" ]; then
           future_canary="$future_latest-canary.0"
           else
@@ -51,7 +51,7 @@ jobs:
           future_canary="$canary_major.$canary_minor.$canary_patch-canary.$((canary_version + 1))"
           fi
           bunx json -I -f package.json -e "this.version=\"$future_canary\""
-           if [ -z "$(npm view "$package_name" version --real 2>/dev/null)" ]; then
+           if [ -z "$(npm view "$package_name" version 2>/dev/null)" ]; then
             npm publish --provenance --access public
           else
             npm publish --provenance --access public --tag canary
