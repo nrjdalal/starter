@@ -41,7 +41,7 @@ jobs:
         run: |
           package_name=$(bunx json -f package.json -a name)
           if ! npm view "$package_name" > /dev/null 2>&1; then
-            echo "Package does not exist. Publishing the package for the first time."
+            echo "Package $package_name does not exist in the npm registry. Skipping publish."
             exit 0
           fi
           current_version=$(bunx json -f package.json -a version)
